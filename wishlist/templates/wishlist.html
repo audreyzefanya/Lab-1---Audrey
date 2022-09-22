@@ -21,6 +21,9 @@
      </tr>
     {% endfor %}
 
+    <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    
 </table>
 
 {% endblock content %}
