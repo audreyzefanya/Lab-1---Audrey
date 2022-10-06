@@ -83,3 +83,15 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('wishlist:login'))
     response.delete_cookie('last_login')
     return response
+
+def create_wishlist(request):
+    if request.method == "POST":
+        nama_barang = request.POST.get("nama_barang")
+        harga_barang = request.POST.get("harga_barang")
+        deskripsi = request.POST.get("deskripsi")
+
+        data_item = BarangWishlist(nama_barang = nama_barang, harga_barang= harga_barang,deskripsi = deskripsi,)
+        data_item.save()
+        return HttpResponse(serializers.serialize("json", [data_item]), content_type="application/json",)
+
+    return HttpResponse("Invalid method", status_code=405)
